@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Your Name | Home</title>
+
+  <!-- Fonts & icons (optional) -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
+
+  <!-- Main stylesheet -->
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+  <!-- ▸ Top navigation  -->
+  <header class="site-header">
+    <div class="container">
+      <h1 class="logo"><a href="#home">Your Name</a></h1>
+
+      <nav class="site-nav" aria-label="Main">
+        <a href="#home">Home</a>
+        <a href="#publications">Publications</a>
+        <a href="#projects">Projects</a>
+        <a href="#math">Math</a>
+        <a href="#cv">CV</a>
+      </nav>
+
+      <!-- light/dark toggle -->
+      <label class="theme-switch" aria-label="Toggle dark mode">
+        <input type="checkbox" id="themeToggle" />
+        <span class="slider"></span>
+      </label>
+    </div>
+  </header>
+
+  <!-- ▸ HERO / about section  -->
+  <section id="home" class="hero">
+    <div class="container hero-grid">
+      <img src="assets/img/profile.jpg" alt="Portrait of Your Name" class="avatar" />
+      <div>
+        <h2 class="name">Your Name</h2>
+        <p class="subtitle">PhD student&nbsp;in&nbsp;Biostatistics</p>
+        <p class="lead">
+          Brief one-sentence research pitch goes here—keep it tight and
+          compelling so visitors instantly know what you do.
+        </p>
+
+        <ul class="icon-links">
+          <li><a href="https://github.com/username" aria-label="GitHub"><i class="fab fa-github"></i></a></li>
+          <li><a href="https://linkedin.com/in/username" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a></li>
+          <li><a href="mailto:you@example.com" aria-label="Email"><i class="fas fa-envelope"></i></a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ▸ Publications  -->
+  <section id="publications" class="strip">
+    <div class="container">
+      <h3 class="section-title">Recent Publications</h3>
+      <article class="card">
+        <h4 class="card-title">
+          Example Paper Title <span class="badge">2024</span>
+        </h4>
+        <p class="journal">Diabetes Technology & Therapeutics</p>
+        <p class="authors">You, A., Co-Author B., Co-Author C.</p>
+        <a class="btn" href="paper-link.pdf" target="_blank" rel="noopener">PDF</a>
+      </article>
+
+      <!-- Duplicate <article> blocks as needed -->
+    </div>
+  </section>
+
+  <!-- ▸ Projects  -->
+  <section id="projects">
+    <div class="container">
+      <h3 class="section-title">Projects</h3>
+      <div class="grid">
+        <figure class="card">
+          <img src="assets/img/project1.png" alt="" />
+          <figcaption>
+            <h4>Project One</h4>
+            <p>One-line description of what the project does.</p>
+            <a class="btn" href="https://github.com/username/project" target="_blank">Code</a>
+          </figcaption>
+        </figure>
+
+        <!-- Repeat as needed -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ▸ Math / notes  -->
+  <section id="math" class="strip">
+    <div class="container">
+      <h3 class="section-title">Math Notes</h3>
+      <ul class="note-list">
+        <li><a href="files/Ch1.pdf">Ch. 1 Probability & Distributions</a></li>
+        <li><a href="files/Ch2.pdf">Ch. 2 Multivariate Distributions</a></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ▸ CV  -->
+  <section id="cv">
+    <div class="container">
+      <h3 class="section-title">Curriculum Vitae</h3>
+      <p>
+        Download a full CV&nbsp;(<a href="files/CV.pdf">PDF</a>) or view a short summary below.
+      </p>
+      <!-- timeline or table could go here -->
+    </div>
+  </section>
+
+  <!-- ▸ Footer  -->
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; 2025 Your Name. Content licensed under CC BY-NC-ND 4.0.</p>
+      <p class="credit">
+        Built with plain HTML/CSS, inspired by
+        <a href="https://tomoki-okuno.com/" target="_blank" rel="noopener">Tomoki Okuno’s site</a>.
+      </p>
+    </div>
+  </footer>
+
+  <!-- Tiny JS for theme toggle -->
+  <script>
+    const checkbox = document.getElementById('themeToggle');
+    checkbox.addEventListener('change', () =>
+      document.documentElement.classList.toggle('dark', checkbox.checked)
+    );
+  </script>
+</body>
+</html>
