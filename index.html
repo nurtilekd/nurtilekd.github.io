@@ -3,7 +3,7 @@
 <head>
   <!-- 1. META & ASSETS ──────────────────── -->
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Nurtilek Duishobaev | Home</title>
 
   <!-- Google Fonts -->
@@ -14,78 +14,87 @@
 </head>
 
 <body>
-  <!-- 2. HEADER ─────────────────────────── -->
-  <header class="site-header">
-    <div class="container">
-      <h1 class="logo"><a href="#home">nurtilekd</a></h1>
+  <!-- page wrapper keeps footer from over-scrolling -->
+  <div class="page">
 
-      <nav class="site-nav" aria-label="Main">
-        <a href="#home">Home</a>
-        <a href="#projects">Projects</a>
-        <a href="#math">Math</a>
-      </nav>
-    </div>
-  </header>
+    <!-- 2. HEADER ─────────────────────────── -->
+    <header class="site-header">
+      <div class="container">
+        <h1 class="logo"><a href="#home">nurtilekd</a></h1>
 
-  <!-- 3. HERO / ABOUT ───────────────────── -->
-  <section id="home" class="hero">
-    <div class="container hero-stack">
-      <img src="assets/img/profile.jpg" alt="Portrait of Nurtilek Duishobaev" class="avatar">
-
-      <h2 class="name">Nurtilek Duishobaev</h2>
-
-      <p class="subtitle nowrap">
-        Bachelors&nbsp;student&nbsp;in&nbsp;Computer&nbsp;Science&nbsp;and&nbsp;Mathematics
-      </p>
-
-      <p class="affil">Korea Advanced Institute of Science and Technology, 2023-Present</p>
-
-      <p class="quote">“only finite amount of mistaekes away from infinite possibilities”</p>
-
-      <a href="files/CV.pdf" class="btn" target="_blank">Download CV</a>
-    </div>
-  </section>
-
-  <!-- 4. PROJECTS ───────────────────────── -->
-  <section id="projects">
-    <div class="container">
-      <h3 class="section-title">Projects</h3>
-
-      <div class="grid">
-        <figure class="card">
-          <img src="assets/img/project1.png" alt="">
-          <figcaption>
-            <h4>Project One</h4>
-            <p>One-line description of what the project does.</p>
-            <a class="btn" href="https://github.com/username/project" target="_blank">Code</a>
-          </figcaption>
-        </figure>
+        <nav class="site-nav" aria-label="Main">
+          <a href="#home">Home</a>
+          <a href="#projects">Projects</a>
+          <a href="#math">Math</a>
+        </nav>
       </div>
-    </div>
-  </section>
+    </header>
 
-  <!-- 5. MATH NOTES ─────────────────────── -->
-  <section id="math">
-    <div class="container">
-      <h3 class="section-title">Math Notes</h3>
+    <!-- 3. HERO / ABOUT ───────────────────── -->
+    <section id="home" class="hero">
+      <div class="container hero-stack">
+        <img src="assets/img/profile.jpg" alt="Portrait of Nurtilek Duishobaev" class="avatar">
 
-      <ul class="note-list">
-        <li><a href="files/Ch1.pdf">Ch. 1 Probability & Distributions</a></li>
-        <li><a href="files/Ch2.pdf">Ch. 2 Multivariate Distributions</a></li>
-      </ul>
-    </div>
-  </section>
+        <h2 class="name">Nurtilek Duishobaev</h2>
 
-  <!-- 6. FOOTER ─────────────────────────── -->
-  <footer class="site-footer">
-    <div class="container">
-      <p>&copy; 2025 Nurtilek Duishobaev.</p>
-      <p class="credit">
-        Built with plain HTML/CSS, inspired by
-        <a href="https://tomoki-okuno.com/" target="_blank" rel="noopener">Tomoki Okuno’s site</a>.
-      </p>
-    </div>
-  </footer>
+        <p class="subtitle nowrap">
+          Bachelors&nbsp;student&nbsp;in&nbsp;Computer&nbsp;Science&nbsp;and&nbsp;Mathematics
+        </p>
+
+        <p class="affil">
+          Korea Advanced Institute of Science and Technology, 2023&nbsp;–&nbsp;Present
+        </p>
+
+        <p class="quote">
+          “only finite amount of mistaekes away from infinite possibilities”
+        </p>
+
+        <a href="files/CV.pdf" class="btn" target="_blank" rel="noopener">Download CV</a>
+      </div>
+    </section>
+
+    <!-- 4. PROJECTS ───────────────────────── -->
+    <section id="projects">
+      <div class="container">
+        <h3 class="section-title">Projects</h3>
+
+        <div class="grid">
+          <figure class="card">
+            <img src="assets/img/project1.png" alt="">
+            <figcaption>
+              <h4>Project One</h4>
+              <p>One-line description of what the project does.</p>
+              <a class="btn" href="https://github.com/username/project" target="_blank" rel="noopener">Code</a>
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. MATH NOTES ─────────────────────── -->
+    <section id="math">
+      <div class="container">
+        <h3 class="section-title">Math Notes</h3>
+
+        <ul class="note-list">
+          <li><a href="files/Ch1.pdf">Ch. 1 Probability &amp; Distributions</a></li>
+          <li><a href="files/Ch2.pdf">Ch. 2 Multivariate Distributions</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 6. FOOTER ─────────────────────────── -->
+    <footer class="site-footer">
+      <div class="container">
+        <p>&copy; 2025 Nurtilek Duishobaev.</p>
+        <p class="credit">
+          Built with plain HTML/CSS, inspired by
+          <a href="https://tomoki-okuno.com/" target="_blank" rel="noopener">Tomoki Okuno’s site</a>.
+        </p>
+      </div>
+    </footer>
+
+  </div><!-- /.page -->
 
   <!-- 7. SCRIPTS ────────────────────────── -->
   <script src="https://kit.fontawesome.com/YOUR_KIT_ID.js" crossorigin="anonymous"></script>
