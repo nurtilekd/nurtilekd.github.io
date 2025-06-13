@@ -114,12 +114,13 @@ figure.card figcaption{padding:1rem}
 
 /* ──────────────────────── full-screen slides */
 html{
-  scroll-behavior:smooth;
-  scroll-snap-type:y mandatory;
+   scroll-behavior:smooth;
 }
+
 section{
-  min-height:100vh;
-  padding:4rem 0;
-  display:flex;flex-direction:column;justify-content:center;
-  scroll-snap-align:start;
+   min-height:100vh;
+   padding:4rem 0;
+   display:flex;
+   flex-direction:column;
+   justify-content:center;
 }
