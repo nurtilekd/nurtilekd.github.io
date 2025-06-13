@@ -1,54 +1,67 @@
-/* ───────────────────────────────
-   Variables & palette
-   ─────────────────────────────── */
+/*───────────────────────────────────────
+  1. Variables & Palette
+───────────────────────────────────────*/
 :root{
   --font-body:'Inter',sans-serif;
   --radius:8px;
 
-  /* colour scheme */
-  --header-bg:#0E2148;   /* navy */
-  --footer-bg:#0E2148;   /* same as header */
-  --sec-odd:#483AA0;     /* darker purple */
-  --sec-even:#7965C1;    /* lighter purple */
-  --text:#E3D095;        /* warm yellow */
-  --accent:#E3D095;      /* links & buttons */
-  --accent-hover:#F4E5BF;/* hover tint */
+  --header-bg:#0E2148;
+  --footer-bg:#0E2148;
+  --sec-odd:#483AA0;
+  --sec-even:#7965C1;
+  --text:#E3D095;
+  --accent:#E3D095;
+  --accent-hover:#F4E5BF;
 }
 
-/* ───────── reset & global defaults */
+/*───────────────────────────────────────
+  2. Reset & Global Defaults
+───────────────────────────────────────*/
 *{box-sizing:border-box;margin:0;padding:0}
 img{max-width:100%;height:auto}
 
-body{
+html,body{
+  overscroll-behavior:contain;
+  scroll-behavior:smooth;
   font-family:var(--font-body);
-  background:var(--sec-odd);   /* first slide */
+  background:var(--sec-odd);
   color:var(--text);
   line-height:1.6;
 }
+
 a{color:var(--accent);text-decoration:none}
 a:hover{color:var(--accent-hover)}
+
 .container{max-width:1200px;margin:0 auto;padding:0 1.5rem}
 
-/* ───────── header bar */
+/*───────────────────────────────────────
+  3. Header
+───────────────────────────────────────*/
 .site-header{
-  position:sticky;top:0;z-index:100;
-  background:var(--header-bg);color:var(--text);
+  position:fixed;
+  top:0;left:0;width:100%;
+  z-index:100;
+  background:var(--header-bg);
+  color:var(--text);
 }
+
 .site-header .container{
-  position: fixed;      /* instead of sticky */
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 100;
-  background: var(--header-bg);
-  color: var(--text);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:.8rem 1rem;
 }
+
 .logo{font-size:1.25rem;font-weight:800}
+
 .site-nav a{margin-left:1rem;font-weight:600;color:var(--text)}
 .site-nav a:hover{opacity:.8}
 
-/* ───────── HERO (single-column stack) */
+/*───────────────────────────────────────
+  4. Hero
+───────────────────────────────────────*/
 .hero{padding:4rem 0}
+
 .hero-stack{
   display:flex;
   flex-direction:column;
@@ -56,106 +69,107 @@ a:hover{color:var(--accent-hover)}
   text-align:center;
   gap:1.75rem;
 }
+
 .avatar{width:200px;height:200px;border-radius:50%;object-fit:cover}
+
 .subtitle{font-weight:600;color:var(--accent)}
 .nowrap{white-space:nowrap}
 .affil{opacity:.9;font-size:1rem}
-/* ---------- quote styling ---------- */
+
 .quote{
-  font-family:'IBM Plex Mono', monospace;
-  font-size:clamp(1rem, 2vw + .5rem, 1.25rem);
+  font-family:'IBM Plex Mono',monospace;
+  font-size:clamp(1rem,2vw + .5rem,1.25rem);
   white-space:nowrap;
   margin-inline:auto;
   max-width:100%;
 }
 
-/* allow normal wrapping on very narrow screens */
 @media(max-width:500px){
   .quote{white-space:normal}
 }
 
-/* Interest list */
+/*───────────────────────────────────────
+  5. Section Basics
+───────────────────────────────────────*/
+section{
+  min-height:100vh;
+  padding:4rem 0;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+
+section:nth-of-type(odd){background:var(--sec-odd)}
+section:nth-of-type(even){background:var(--sec-even)}
+
+.section-title{font-size:1.5rem;margin:0 0 1.5rem;font-weight:800}
+
+/*───────────────────────────────────────
+  6. Lists & Interest Block
+───────────────────────────────────────*/
 .interest-list{
   list-style:disc;
   padding-left:1.25rem;
   text-align:left;
   max-width:22rem;
 }
+
 .interest-list li+li{margin-top:.4rem}
 
-/* ───────── alternating slides */
-section:nth-of-type(odd){background:var(--sec-odd)}
-section:nth-of-type(even){background:var(--sec-even)}
-.section-title{font-size:1.5rem;margin:0 0 1.5rem;font-weight:800}
-
-/* ───────── cards & grids */
+/*───────────────────────────────────────
+  7. Cards & Grids
+───────────────────────────────────────*/
 .card{
   background:rgba(255,255,255,.08);
   border:1px solid rgba(255,255,255,.18);
-  border-radius:var(--radius);padding:1rem;margin-bottom:1.5rem
+  border-radius:var(--radius);
+  padding:1rem;
+  margin-bottom:1.5rem;
 }
-.grid{display:grid;gap:1.5rem;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+
+.grid{
+  display:grid;
+  gap:1.5rem;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+}
+
 figure.card{padding:0;overflow:hidden}
 figure.card figcaption{padding:1rem}
 
-/* odds & ends */
+/*───────────────────────────────────────
+  8. Utility Components
+───────────────────────────────────────*/
 .badge{
   background:transparent;
   border:1px solid var(--accent);
   color:var(--accent);
-  padding:.15rem .4rem;border-radius:.25rem;font-size:.75rem
+  padding:.15rem .4rem;
+  border-radius:.25rem;
+  font-size:.75rem;
 }
+
 .btn{
-  display:inline-block;font-weight:600;
-  padding:.4rem .75rem;border:1px solid var(--accent);
-  border-radius:var(--radius);color:var(--accent)
+  display:inline-block;
+  font-weight:600;
+  padding:.4rem .75rem;
+  border:1px solid var(--accent);
+  border-radius:var(--radius);
+  color:var(--accent);
+  margin-top:1.5rem;
 }
+
 .btn:hover{background:var(--accent);color:var(--header-bg)}
+
 .note-list{list-style:none}
 .note-list li{margin-bottom:.5rem}
 
-/* ───────── footer */
+/*───────────────────────────────────────
+  9. Footer
+───────────────────────────────────────*/
 .site-footer{
   background:var(--footer-bg);
   color:var(--text);
-  text-align:center;font-size:.875rem;padding:2rem 0
-}
-
-/* ───────── page flow */
-html{scroll-behavior:smooth}
-section{
-  min-height:100vh;
-  padding:4rem 0;
-  display:flex;flex-direction:column;justify-content:center;
-}
-
-/* ───── hero: centre everything & add breathing room */
-.hero-grid{
-  /* replace the old two-column grid with one vertical flex stack */
-  display:flex;
-  flex-direction:column;
-  align-items:center;   /* horizontally centre */
-  text-align:center;    /* centre all text */
-  gap:1.75rem;          /* equal vertical gaps between items */
-  max-width:42rem;      /* keep line-length comfortable */
-  margin-inline:auto;   /* centre the block itself */
-}
-
-/* give the subtitle, affiliation and quote a touch more spacing */
-.subtitle{margin-top:.25rem}
-.affil{margin-top:.25rem}
-.quote{margin-top:.75rem}
-
-/* interest list stays left-aligned but centred as a block */
-.interest-list{text-align:left;margin-inline:auto}
-
-/* make the Download CV button sit farther from the list */
-.btn{margin-top:1.5rem}
-
-section{
-  min-height:100vh;
-  padding:4rem 0;          /* back to what you had */
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
+  text-align:center;
+  font-size:.875rem;
+  padding:2rem 0;
 }
