@@ -155,5 +155,9 @@ section{
 :root{ --header-h: 64px }
 
 section{
-  padding-top:calc(4rem + var(--header-h));
+  min-height:100vh;
+  padding:4rem 0;          /* back to what you had */
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
 }
