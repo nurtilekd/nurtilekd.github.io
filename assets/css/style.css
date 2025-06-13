@@ -35,8 +35,13 @@ a:hover{color:var(--accent-hover)}
   background:var(--header-bg);color:var(--text);
 }
 .site-header .container{
-  display:flex;justify-content:space-between;align-items:center;
-  padding:.8rem 1rem;
+  position: fixed;      /* instead of sticky */
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  background: var(--header-bg);
+  color: var(--text);
 }
 .logo{font-size:1.25rem;font-weight:800}
 .site-nav a{margin-left:1rem;font-weight:600;color:var(--text)}
@@ -146,3 +151,9 @@ section{
 
 /* make the Download CV button sit farther from the list */
 .btn{margin-top:1.5rem}
+
+:root{ --header-h: 64px }
+
+section{
+  padding-top:calc(4rem + var(--header-h));
+}
