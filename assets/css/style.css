@@ -6,10 +6,10 @@
   --radius:8px;
 
   /* four-colour scheme */
-  --sec-odd:#0B1D51;        /* 1  navy */
-  --sec-even:#725CAD;       /* 2  purple */
-  --header-bg:#8CCDEB;      /* 3  sky blue */
-  --footer-bg:#FFE3A9;      /* 4  cream */
+  --sec-odd:#D4C9BE;        /* 1  navy */
+  --sec-even:#123458;       /* 2  purple */
+  --header-bg:#F1EFEC;      /* 3  sky blue */
+  --footer-bg:#030303;      /* 4  cream */
 
   /* neutrals & accent */
   --text-light:#f4f4f4;     /* body copy on dark slides */
