@@ -152,8 +152,6 @@ section{
 /* make the Download CV button sit farther from the list */
 .btn{margin-top:1.5rem}
 
-:root{ --header-h: 64px }
-
 section{
   min-height:100vh;
   padding:4rem 0;          /* back to what you had */
