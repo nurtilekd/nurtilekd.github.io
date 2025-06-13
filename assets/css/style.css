@@ -190,7 +190,21 @@ figure.card figcaption{padding:1rem}
 }
 
 /*───────────────────────────────────────
-  11. Responsive Typography for Hero
+  11. Link Colors & Logo
+───────────────────────────────────────*/
+a,
+a:visited{
+  color:var(--accent);
+}
+a:active{
+  color:var(--accent);
+}
+a:hover{
+  color:var(--accent-hover);
+}
+
+/*───────────────────────────────────────
+  12. Responsive Typography for Hero
 ───────────────────────────────────────*/
 @media(max-width:600px){
   .hero h1{
