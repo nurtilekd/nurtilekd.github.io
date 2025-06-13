@@ -5,17 +5,11 @@
   --font-body: 'Inter', sans-serif;
   --radius: 8px;
 
-  /* Light palette */
-  --bg: #fdfdfd;
-  --text: #222;
-  --accent: #2563eb;
-  --muted: #555;
-}
-.dark:root{            /* toggled by JS checkbox */
-  --bg: #121212;
+  /* Dark palette */
+  --bg:   #121212;
   --text: #eaeaea;
-  --accent: #60a5fa;
-  --muted: #aaa;
+  --accent: #592C63;
+  --muted:  #aaa;
 }
 
 *{box-sizing:border-box;margin:0;padding:0}
