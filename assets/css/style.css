@@ -104,3 +104,17 @@ figure.card figcaption{padding:1rem}
   border-top:1px solid #e5e7eb;font-size:.875rem
 }
 .dark .site-footer{border-color:#333}
+
+/* ──────────────────────── full-screen slides */
+html{
+  scroll-behavior:smooth;             /* smooth auto-scroll */
+  scroll-snap-type:y mandatory;       /* snap each slide */
+}
+
+section{
+  min-height:100vh;                   /* each section ≥ full viewport */
+  padding:4rem 0;                     /* breathing room */
+  display:flex;flex-direction:column; /* vertical centring (optional) */
+  justify-content:center;
+  scroll-snap-align:start;
+}
