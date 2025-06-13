@@ -115,3 +115,26 @@ section{
   padding:4rem 0;
   display:flex;flex-direction:column;justify-content:center;
 }
+
+/* ───── hero: centre everything & add breathing room */
+.hero-grid{
+  /* replace the old two-column grid with one vertical flex stack */
+  display:flex;
+  flex-direction:column;
+  align-items:center;   /* horizontally centre */
+  text-align:center;    /* centre all text */
+  gap:1.75rem;          /* equal vertical gaps between items */
+  max-width:42rem;      /* keep line-length comfortable */
+  margin-inline:auto;   /* centre the block itself */
+}
+
+/* give the subtitle, affiliation and quote a touch more spacing */
+.subtitle{margin-top:.25rem}
+.affil{margin-top:.25rem}
+.quote{margin-top:.75rem}
+
+/* interest list stays left-aligned but centred as a block */
+.interest-list{text-align:left;margin-inline:auto}
+
+/* make the Download CV button sit farther from the list */
+.btn{margin-top:1.5rem}
