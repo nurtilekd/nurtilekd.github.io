@@ -62,11 +62,11 @@ a:hover{color:var(--accent-hover)}
 .affil{opacity:.9;font-size:1rem}
 /* ---------- quote styling ---------- */
 .quote{
-  font-family:'IBM Plex Mono',monospace; /* clean typewriter look   */
-  font-size:1.5rem;                      /* adjust size as desired  */
-  white-space:nowrap;                    /* keep on one line        */
-  margin-inline:auto;                    /* centred                 */
-  max-width:100%;                        /* prevent overflow scroll */
+  font-family:'IBM Plex Mono', monospace;
+  font-size:clamp(1rem, 2vw + .5rem, 1.25rem);
+  white-space:nowrap;
+  margin-inline:auto;
+  max-width:100%;
 }
 
 /* allow normal wrapping on very narrow screens */
