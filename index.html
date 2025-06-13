@@ -1,74 +1,78 @@
 <!DOCTYPE html>
 <html lang="en" class="dark">
-  
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Nurtilek Duishobaev | Home</title>
 
-  <!-- Fonts & icons (optional) -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
-
-  <!-- Main stylesheet -->
-  <link rel="stylesheet" href="assets/css/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
 </head>
+
 <body>
   <!-- ▸ Top navigation  -->
   <header class="site-header">
     <div class="container">
-      <h1 class="logo"><a href="#home">Your Name</a></h1>
+      <h1 class="logo"><a href="#home">Nurtilek&nbsp;Duishobaev</a></h1>
 
       <nav class="site-nav" aria-label="Main">
         <a href="#home">Home</a>
-        <a href="#publications">Publications</a>
         <a href="#projects">Projects</a>
         <a href="#math">Math</a>
         <a href="#cv">CV</a>
       </nav>
-
-      <!-- light/dark toggle -->
-      <label class="theme-switch" aria-label="Toggle dark mode">
-        <input type="checkbox" id="themeToggle" />
-        <span class="slider"></span>
-      </label>
     </div>
   </header>
 
   <!-- ▸ HERO / about section  -->
   <section id="home" class="hero">
     <div class="container hero-grid">
-      <img src="assets/img/profile.jpg" alt="Portrait of Your Name" class="avatar" />
-      <div>
-        <h2 class="name">Your Name</h2>
-        <p class="subtitle">PhD student&nbsp;in&nbsp;Biostatistics</p>
-        <p class="lead">
-          Brief one-sentence research pitch goes here—keep it tight and
-          compelling so visitors instantly know what you do.
-        </p>
+
+      <!-- left stack -->
+      <div class="profile-stack">
+        <img src="assets/img/profile.jpg" alt="Portrait of Nurtilek Duishobaev" class="avatar">
+
+        <h2 class="name">Nurtilek Duishobaev</h2>
+        <p class="subtitle">PhD student in Biostatistics</p>
+        <p class="text-muted">University of Somewhere, 2024-Present</p>
 
         <ul class="icon-links">
           <li><a href="https://github.com/username" aria-label="GitHub"><i class="fab fa-github"></i></a></li>
           <li><a href="https://linkedin.com/in/username" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a></li>
-          <li><a href="mailto:you@example.com" aria-label="Email"><i class="fas fa-envelope"></i></a></li>
         </ul>
+
+        <a href="files/CV.pdf" class="btn" target="_blank">Download CV</a>
       </div>
-    </div>
-  </section>
 
-  <!-- ▸ Publications  -->
-  <section id="publications" class="strip">
-    <div class="container">
-      <h3 class="section-title">Recent Publications</h3>
-      <article class="card">
-        <h4 class="card-title">
-          Example Paper Title <span class="badge">2024</span>
-        </h4>
-        <p class="journal">Diabetes Technology & Therapeutics</p>
-        <p class="authors">You, A., Co-Author B., Co-Author C.</p>
-        <a class="btn" href="paper-link.pdf" target="_blank" rel="noopener">PDF</a>
-      </article>
+      <!-- right column -->
+      <div>
+        <p class="lead">
+          I'm a PhD biostatistician interested in adaptive survival prediction for personalised medicine.
+          My long-term goal is to help people live healthier, longer lives.
+        </p>
 
-      <!-- Duplicate <article> blocks as needed -->
+        <div class="about-grid">
+          <div>
+            <h3 class="section-title">Interests</h3>
+            <ul>
+              <li>Joint Models for Longitudinal & Survival Data</li>
+              <li>Dynamic Prediction</li>
+              <li>Optimisation</li>
+              <li>Longevity Medicine</li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 class="section-title">Education</h3>
+            <ul>
+              <li><strong>PhD Biostatistics</strong>, 2024-Present<br><span class="text-muted">University of Somewhere</span></li>
+              <li><strong>MS Biostatistics</strong>, 2023<br><span class="text-muted">University of Elsewhere</span></li>
+              <li><strong>BS Mathematics</strong>, 2021<br><span class="text-muted">College Name</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
     </div>
   </section>
 
@@ -78,15 +82,13 @@
       <h3 class="section-title">Projects</h3>
       <div class="grid">
         <figure class="card">
-          <img src="assets/img/project1.png" alt="" />
+          <img src="assets/img/project1.png" alt="">
           <figcaption>
             <h4>Project One</h4>
             <p>One-line description of what the project does.</p>
             <a class="btn" href="https://github.com/username/project" target="_blank">Code</a>
           </figcaption>
         </figure>
-
-        <!-- Repeat as needed -->
       </div>
     </div>
   </section>
@@ -96,7 +98,7 @@
     <div class="container">
       <h3 class="section-title">Math Notes</h3>
       <ul class="note-list">
-        <li><a href="files/Ch1.pdf">Ch. 1 Probability & Distributions</a></li>
+        <li><a href="files/Ch1.pdf">Ch. 1 Probability &amp; Distributions</a></li>
         <li><a href="files/Ch2.pdf">Ch. 2 Multivariate Distributions</a></li>
       </ul>
     </div>
@@ -106,17 +108,14 @@
   <section id="cv">
     <div class="container">
       <h3 class="section-title">Curriculum Vitae</h3>
-      <p>
-        Download a full CV&nbsp;(<a href="files/CV.pdf">PDF</a>) or view a short summary below.
-      </p>
-      <!-- timeline or table could go here -->
+      <p>You can also <a href="files/CV.pdf">download the full PDF</a>.</p>
     </div>
   </section>
 
   <!-- ▸ Footer  -->
   <footer class="site-footer">
     <div class="container">
-      <p>&copy; 2025 Your Name. Content licensed under CC BY-NC-ND 4.0.</p>
+      <p>&copy; 2025 Nurtilek Duishobaev.</p>
       <p class="credit">
         Built with plain HTML/CSS, inspired by
         <a href="https://tomoki-okuno.com/" target="_blank" rel="noopener">Tomoki Okuno’s site</a>.
@@ -124,5 +123,7 @@
     </div>
   </footer>
 
+  <!-- Font Awesome (icons) -->
+  <script src="https://kit.fontawesome.com/YOUR_KIT_ID.js" crossorigin="anonymous"></script>
 </body>
 </html>
