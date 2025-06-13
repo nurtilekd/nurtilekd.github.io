@@ -5,8 +5,9 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Nurtilek Duishobaev | Home</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/style.css">
+  <!-- fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Great+Vibes&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 
 <body>
@@ -23,45 +24,38 @@
     </div>
   </header>
 
-  <!-- ▸ HERO / about section  -->
+  <!-- ▸ HERO / about (single-column)  -->
   <section id="home" class="hero">
-    <div class="container hero-grid">
+    <div class="container hero-stack">
 
-      <!-- left stack -->
-      <div class="profile-stack">
-        <img src="assets/img/profile.jpg" alt="Portrait of Nurtilek Duishobaev" class="avatar">
+      <img src="assets/img/profile.jpg"
+           alt="Portrait of Nurtilek Duishobaev"
+           class="avatar">
 
-        <h2 class="name">Nurtilek Duishobaev</h2>
-        <p class="subtitle">Bachelors student in Computer Science and Mathematics</p>
-        <p class="text-muted">Korea Advanced Institute of Science and Technology, 2023-Present</p>
+      <h2 class="name">Nurtilek Duishobaev</h2>
 
-        <ul class="icon-links">
-          <li><a href="https://github.com/username" aria-label="GitHub"><i class="fab fa-github"></i></a></li>
-          <li><a href="https://linkedin.com/in/username" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a></li>
-        </ul>
+      <!-- one-line subtitle (non-breaking spaces) -->
+      <p class="subtitle nowrap">
+        Bachelors&nbsp;student&nbsp;in&nbsp;Computer&nbsp;Science&nbsp;and&nbsp;Mathematics
+      </p>
 
-        <a href="files/CV.pdf" class="btn" target="_blank">Download CV</a>
-      </div>
+      <p class="affil">
+        Korea Advanced Institute of Science and Technology, 2023-Present
+      </p>
 
-      <!-- right column -->
-      <div>
-        <p class="lead">
-          Want to do something people will actually find useful.
-        </p>
+      <p class="quote">
+        “only finite amount of mistaekes away from infinite possibilities”
+      </p>
 
-        <div class="about-grid">
-          <div>
-            <h3 class="section-title">Interests</h3>
-            <ul>
-              <li>doing A</li>
-              <li>doing B</li>
-              <li>doing C</li>
-              <li>doing D</li>
-            </ul>
-          </div>
-        </div>
-      </div>
+      <h3 class="section-title">Interests</h3>
+      <ul class="interest-list">
+        <li>doing A</li>
+        <li>doing B</li>
+        <li>doing C</li>
+        <li>doing D</li>
+      </ul>
 
+      <a href="files/CV.pdf" class="btn" target="_blank">Download&nbsp;CV</a>
     </div>
   </section>
 
@@ -82,12 +76,12 @@
     </div>
   </section>
 
-  <!-- ▸ Math / notes  -->
+  <!-- ▸ Math  -->
   <section id="math" class="strip">
     <div class="container">
       <h3 class="section-title">Math Notes</h3>
       <ul class="note-list">
-        <li><a href="files/Ch1.pdf">Ch. 1 Probability &amp; Distributions</a></li>
+        <li><a href="files/Ch1.pdf">Ch. 1 Probability & Distributions</a></li>
         <li><a href="files/Ch2.pdf">Ch. 2 Multivariate Distributions</a></li>
       </ul>
     </div>
@@ -104,7 +98,7 @@
     </div>
   </footer>
 
-  <!-- Font Awesome (icons) -->
+  <!-- Font Awesome icons -->
   <script src="https://kit.fontawesome.com/YOUR_KIT_ID.js" crossorigin="anonymous"></script>
 </body>
 </html>
