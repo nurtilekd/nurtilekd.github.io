@@ -6,9 +6,9 @@
   --radius:8px;
 
   /* four-colour scheme */
-  --sec-odd:#D4C9BE;        /* 1  navy */
+  --sec-odd:#F1EFEC;        /* 1  navy */
   --sec-even:#123458;       /* 2  purple */
-  --header-bg:#F1EFEC;      /* 3  sky blue */
+  --header-bg:#D4C9BE;      /* 3  sky blue */
   --footer-bg:#030303;      /* 4  cream */
 
   /* neutrals & accent */
