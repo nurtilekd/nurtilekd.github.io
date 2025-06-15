@@ -217,3 +217,28 @@ a:hover{
     font-size:clamp(.9rem,4.5vw,1.1rem);
   }
 }
+
+/*───────────────────────────────────────
+  13. Math Column Styling
+───────────────────────────────────────*/
+.textbook-grid{
+  display:grid;
+  gap:1.5rem;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+}
+
+@media (min-width:640px){
+  .textbook-grid{
+    grid-template-columns:repeat(3,1fr);
+  }
+}
+
+.textbook h4{
+  margin-bottom:.4rem;
+  font-weight:600;
+}
+
+.textbook .note-list{
+  padding-left:0;
+  list-style:none;
+}
