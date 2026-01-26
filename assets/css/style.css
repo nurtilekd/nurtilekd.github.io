@@ -1,244 +1,355 @@
-/*───────────────────────────────────────
-  1. Variables & Palette
-───────────────────────────────────────*/
-:root{
-  --font-body:'Inter',sans-serif;
-  --radius:8px;
+/* assets/css/style.css */
 
-  --header-bg:#0E2148;
-  --footer-bg:#0E2148;
-  --sec-odd:#483AA0;
-  --sec-even:#7965C1;
-  --text:#E3D095;
-  --accent:#E3D095;
-  --accent-hover:#F4E5BF;
+/* ─────────────────────────────────────
+   Theme tokens (new palette style)
+───────────────────────────────────── */
+:root {
+  --bg: #282828;
+  --text: #ffffff;
+  --bar: rgba(0, 0, 0, 0.35);
+  --btn-bg: rgba(255, 255, 255, 0.12);
+  --btn-bg-hover: rgba(255, 255, 255, 0.18);
+  --btn-border: rgba(255, 255, 255, 0.18);
+
+  --card: rgba(255, 255, 255, 0.08);
+  --card-border: rgba(255, 255, 255, 0.18);
+
+  --radius: 12px;
+  --header-h: 76px;
+  --maxw: 1100px;
+
+  --font-body: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Helvetica,
+    Arial, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Monaco,
+    Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
-/*───────────────────────────────────────
-  2. Reset & Global Defaults
-───────────────────────────────────────*/
-*{box-sizing:border-box;margin:0;padding:0}
-img{max-width:100%;height:auto}
+body.light {
+  --bg: #f4f4f4;
+  --text: #111111;
+  --bar: rgba(0, 0, 0, 0.06);
+  --btn-bg: rgba(0, 0, 0, 0.06);
+  --btn-bg-hover: rgba(0, 0, 0, 0.1);
+  --btn-border: rgba(0, 0, 0, 0.12);
 
-html,body{
-  overscroll-behavior:contain;
-  scroll-behavior:smooth;
-  font-family:var(--font-body);
-  background:var(--sec-odd);
-  color:var(--text);
-  line-height:1.6;
+  --card: rgba(0, 0, 0, 0.05);
+  --card-border: rgba(0, 0, 0, 0.12);
 }
 
-html,body{overflow-x:hidden;}
-
-/*───────────────────────────────────────
-  3. Page Wrapper & Scroll Guard
-───────────────────────────────────────*/
-.page{
-  display:flex;
-  flex-direction:column;
-  min-height:100%;
-}
-footer{
-  flex-shrink:0;
-  overflow:hidden;
+/* ─────────────────────────────────────
+   Reset / globals
+───────────────────────────────────── */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-.container{max-width:1200px;margin:0 auto;padding:0 1.5rem}
-
-/*───────────────────────────────────────
-  4. Header
-───────────────────────────────────────*/
-.site-header{
-  position:fixed;
-  top:0;left:0;width:100%;
-  z-index:100;
-  background:var(--header-bg);
-  color:var(--text);
+html {
+  scroll-behavior: smooth;
 }
 
-.site-header .container{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:.8rem 1rem;
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  line-height: 1.6;
+  transition: background 200ms ease, color 200ms ease;
 }
 
-.logo{font-size:1.25rem;font-weight:800}
-
-.site-nav a{margin-left:1rem;font-weight:600;color:var(--text)}
-.site-nav a:hover{opacity:.8}
-
-/*───────────────────────────────────────
-  5. Hero / Home Section
-───────────────────────────────────────*/
-.hero{
-  width:100vw;
-  overflow:hidden;
-  padding:4rem 0;
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
 }
 
-.hero-stack{
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  text-align:center;
-  gap:1.75rem;
+a {
+  color: inherit;
+  text-decoration: none;
 }
 
-.avatar{width:200px;height:200px;border-radius:50%;object-fit:cover}
-
-.subtitle{font-weight:600;color:var(--accent)}
-.nowrap{white-space:nowrap}
-.affil{opacity:.9;font-size:1rem}
-
-.quote{
-  font-family:'IBM Plex Mono',monospace;
-  font-size:clamp(1rem,2vw + .5rem,1.25rem);
-  white-space:nowrap;
-  margin-inline:auto;
-  max-width:100%;
+a:hover {
+  opacity: 0.9;
 }
 
-@media(max-width:500px){
-  .hero{padding:3rem 1rem;}
-  .quote{white-space:normal}
+/* Keep anchor jumps from hiding behind fixed header */
+section {
+  scroll-margin-top: calc(var(--header-h) + 16px);
 }
 
-/*───────────────────────────────────────
-  6. Section Basics
-───────────────────────────────────────*/
-section{
-  min-height:100vh;
-  padding:4rem 0;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
+.container {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 0 1.5rem;
 }
 
-section:nth-of-type(odd){background:var(--sec-odd)}
-section:nth-of-type(even){background:var(--sec-even)}
-
-.section-title{font-size:1.5rem;margin:0 0 1.5rem;font-weight:800}
-
-/*───────────────────────────────────────
-  7. Lists & Interest Block
-───────────────────────────────────────*/
-.interest-list{
-  list-style:disc;
-  padding-left:1.25rem;
-  text-align:left;
-  max-width:22rem;
+/* ─────────────────────────────────────
+   Top bar (name + nav left, toggle right)
+───────────────────────────────────── */
+.topbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--header-h);
+  display: flex;
+  align-items: center;
+  background: var(--bar);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--btn-border);
+  z-index: 10;
 }
 
-.interest-list li+li{margin-top:.4rem}
-
-/*───────────────────────────────────────
-  8. Cards & Grids
-───────────────────────────────────────*/
-.card{
-  background:rgba(255,255,255,.08);
-  border:1px solid rgba(255,255,255,.18);
-  border-radius:var(--radius);
-  padding:1rem;
-  margin-bottom:1.5rem;
+.topbar-inner {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
 }
 
-.grid{
-  display:grid;
-  gap:1.5rem;
-  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  min-width: 0;
 }
 
-figure.card{padding:0;overflow:hidden}
-figure.card figcaption{padding:1rem}
-
-/*───────────────────────────────────────
-  9. Utility Components
-───────────────────────────────────────*/
-.badge{
-  background:transparent;
-  border:1px solid var(--accent);
-  color:var(--accent);
-  padding:.15rem .4rem;
-  border-radius:.25rem;
-  font-size:.75rem;
+.brand-name {
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  white-space: nowrap;
+  font-size: 1.05rem;
 }
 
-.btn{
-  display:inline-block;
-  font-weight:600;
-  padding:.4rem .75rem;
-  border:1px solid var(--accent);
-  border-radius:var(--radius);
-  color:var(--accent);
-  margin-top:1.5rem;
+.site-nav {
+  display: flex;
+  gap: 0.9rem;
+  flex-wrap: wrap;
 }
 
-.btn:hover{background:var(--accent);color:var(--header-bg)}
-
-.note-list{list-style:none}
-.note-list li{margin-bottom:.5rem}
-
-/*───────────────────────────────────────
-  10. Footer
-───────────────────────────────────────*/
-.site-footer{
-  background:var(--footer-bg);
-  color:var(--text);
-  text-align:center;
-  font-size:.875rem;
-  padding:2rem 0;
+.site-nav a {
+  padding: 0.25rem 0.5rem;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  font-weight: 600;
+  font-size: 0.95rem;
+  opacity: 0.95;
 }
 
-/*───────────────────────────────────────
-  11. Link Colors & Logo
-───────────────────────────────────────*/
-a,
-a:visited{
-  color:var(--accent);
-}
-a:active{
-  color:var(--accent);
-}
-a:hover{
-  color:var(--accent-hover);
+.site-nav a:hover {
+  border-color: var(--btn-border);
+  background: var(--btn-bg);
 }
 
-/*───────────────────────────────────────
-  12. Responsive Typography for Hero
-───────────────────────────────────────*/
-@media(max-width:600px){
-  .hero h1{
-    font-size:clamp(1.6rem,6vw,2.2rem);
-    line-height:1.2;
+/* Theme button */
+.theme-toggle {
+  appearance: none;
+  border: 1px solid var(--btn-border);
+  background: var(--btn-bg);
+  color: var(--text);
+  width: 52px;
+  height: 52px;
+  border-radius: 999px;
+  cursor: pointer;
+  font-size: 22px;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 120ms ease, background 200ms ease,
+    border-color 200ms ease;
+}
+
+.theme-toggle:hover {
+  background: var(--btn-bg-hover);
+}
+
+.theme-toggle:active {
+  transform: scale(0.96);
+}
+
+.theme-toggle:focus-visible,
+.site-nav a:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+
+/* ─────────────────────────────────────
+   Sections
+───────────────────────────────────── */
+main {
+  padding-top: calc(var(--header-h) + 28px);
+}
+
+section {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 4rem 0;
+}
+
+/* Home */
+.hero-stack {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1.15rem;
+}
+
+.avatar {
+  width: 190px;
+  height: 190px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid var(--btn-border);
+}
+
+.name {
+  font-size: clamp(2rem, 3vw + 1rem, 3rem);
+  font-weight: 600; /* closer to your reference */
+  letter-spacing: 0.4px;
+  line-height: 1.15;
+}
+
+.subtitle {
+  font-weight: 600;
+  opacity: 0.95;
+}
+
+.affil {
+  opacity: 0.85;
+}
+
+.quote {
+  font-family: var(--font-mono);
+  font-size: clamp(1rem, 1.2vw + 0.7rem, 1.25rem);
+  opacity: 0.95;
+  max-width: 62ch;
+}
+
+/* Buttons */
+.btn {
+  display: inline-block;
+  padding: 0.5rem 0.9rem;
+  margin-top: 0.75rem;
+  border-radius: 999px;
+  border: 1px solid var(--btn-border);
+  background: var(--btn-bg);
+  font-weight: 600;
+  transition: background 200ms ease;
+}
+
+.btn:hover {
+  background: var(--btn-bg-hover);
+}
+
+/* Projects + Blog */
+.section-title {
+  font-size: 1.35rem;
+  font-weight: 800;
+  margin-bottom: 1.25rem;
+  letter-spacing: 0.2px;
+}
+
+.grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+figure.card {
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+figure.card figcaption {
+  padding: 1rem;
+}
+
+figure.card h4 {
+  font-weight: 800;
+  margin-bottom: 0.4rem;
+}
+
+figure.card p {
+  opacity: 0.9;
+}
+
+/* Blog cards (same idea as your old math notes) */
+.textbook-grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+.textbook {
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  padding: 1rem;
+}
+
+.textbook h4 {
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+}
+
+.note-list {
+  list-style: none;
+  padding-left: 0;
+}
+
+.note-list li + li {
+  margin-top: 0.5rem;
+}
+
+.note-list a {
+  display: inline-block;
+  padding: 0.25rem 0.4rem;
+  border-radius: 8px;
+}
+
+.note-list a:hover {
+  background: var(--btn-bg);
+}
+
+/* Footer */
+.site-footer {
+  border-top: 1px solid var(--btn-border);
+  padding: 2rem 0;
+  text-align: center;
+  opacity: 0.9;
+}
+
+.credit {
+  margin-top: 0.4rem;
+  opacity: 0.85;
+  font-size: 0.95rem;
+}
+
+/* Responsive header usability */
+@media (max-width: 640px) {
+  .brand {
+    gap: 0.8rem;
   }
-  .hero p{
-    font-size:clamp(.9rem,4.5vw,1.1rem);
+
+  .site-nav {
+    gap: 0.35rem;
   }
-}
 
-/*───────────────────────────────────────
-  13. Math Column Styling
-───────────────────────────────────────*/
-.textbook-grid{
-  display:grid;
-  gap:1.5rem;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-}
-
-@media (min-width:640px){
-  .textbook-grid{
-    grid-template-columns:repeat(3,1fr);
+  .site-nav a {
+    font-size: 0.9rem;
   }
-}
 
-.textbook h4{
-  margin-bottom:.4rem;
-  font-weight:600;
-}
-
-.textbook .note-list{
-  padding-left:0;
-  list-style:none;
+  .theme-toggle {
+    width: 48px;
+    height: 48px;
+    font-size: 20px;
+  }
 }
