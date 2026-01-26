@@ -1,4 +1,3 @@
-// assets/js/theme.js
 const btn = document.getElementById("themeToggle");
 
 function setIcon() {
