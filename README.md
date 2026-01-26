@@ -1,4 +1,5 @@
 ✦ ⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯ ✦
+
 Hey, this is my repository that helps me manage my personal website!
 
 On my website, beyond providing basic contact information, I plan to:
@@ -8,4 +9,5 @@ On my website, beyond providing basic contact information, I plan to:
 - and more!
 
 Updates soon...
+
 ✦ ⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯ ✦
