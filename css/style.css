@@ -203,17 +203,19 @@ section {
   margin-top: 0.4rem;
   width: min(520px, 100%);
   align-self: center;
-  text-align: left;
   display: flex;
   flex-direction: column;
   gap: 0.7rem;
-  padding-left: 107px;
+  padding-left: 0;
 }
 
 .contact-row {
-  display: flex;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 18px 1fr;
+  column-gap: 0.9rem;
+
   align-items: center;
-  gap: 0.9rem;
   padding: 0.35rem 0.45rem;
   border-radius: 10px;
   border: 1px solid transparent;
@@ -223,28 +225,13 @@ section {
   width: 18px;
   height: 18px;
   flex: 0 0 18px;
-
-  background: var(--icon-color);
-
-  -webkit-mask: var(--icon-src) no-repeat center / contain;
-  mask: var(--icon-src) no-repeat center / contain;
-
-  opacity: 0.95;
+  object-fit: contain;
+  opacity: 0.9;
+  filter: grayscale(1) brightness(2);
 }
 
-.contact-row .icon1 {
-  --icon-src: url("../img/icon1.png");
-  --icon-color: #f6d77a;
-}
-
-.contact-row .icon2 {
-  --icon-src: url("../img/icon2.png");
-  --icon-color: #7fd6a3;
-}
-
-.contact-row .icon3 {
-  --icon-src: url("../img/icon3.png");
-  --icon-color: #7fb2ff;
+body.light .contact-row .icon {
+  filter: grayscale(1) brightness(0);
 }
 
 .contact-row .value {
