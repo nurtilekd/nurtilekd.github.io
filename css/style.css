@@ -223,13 +223,28 @@ section {
   width: 18px;
   height: 18px;
   flex: 0 0 18px;
-  object-fit: contain;
-  opacity: 0.9;
-  filter: grayscale(1) brightness(2);
+
+  background: var(--icon-color);
+
+  -webkit-mask: var(--icon-src) no-repeat center / contain;
+  mask: var(--icon-src) no-repeat center / contain;
+
+  opacity: 0.95;
 }
 
-body.light .contact-row .icon {
-  filter: grayscale(1) brightness(0);
+.contact-row .icon1 {
+  --icon-src: url("../img/icon1.png");
+  --icon-color: #f6d77a;
+}
+
+.contact-row .icon2 {
+  --icon-src: url("../img/icon2.png");
+  --icon-color: #7fd6a3;
+}
+
+.contact-row .icon3 {
+  --icon-src: url("../img/icon3.png");
+  --icon-color: #7fb2ff;
 }
 
 .contact-row .value {
