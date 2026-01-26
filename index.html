@@ -1,124 +1,139 @@
+<!-- index.html -->
 <!DOCTYPE html>
-<html lang="en" class="dark">
-<head>
-  <!-- 1. META & ASSETS ──────────────────── -->
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nurtilek Duishobaev | Home</title>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nurtilek Duishobaev</title>
 
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=IBM+Plex+Mono&family=Great+Vibes&display=swap" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=IBM+Plex+Mono&display=swap"
+      rel="stylesheet"
+    />
 
-  <!-- Site CSS -->
-  <link rel="stylesheet" href="assets/css/style.css">
-</head>
+    <link rel="stylesheet" href="assets/css/style.css" />
+  </head>
 
-<body>
-  <!-- page wrapper keeps footer from over-scrolling -->
-  <div class="page">
+  <body>
+    <header class="topbar">
+      <div class="container topbar-inner">
+        <div class="brand">
+          <div class="brand-name">Nurtilek Duishobaev</div>
 
-    <!-- 2. HEADER ─────────────────────────── -->
-    <header class="site-header">
-      <div class="container">
-        <h1 class="logo">nurtilekd</h1>
+          <nav class="site-nav" aria-label="Main">
+            <a href="#home">Home</a>
+            <a href="#projects">Projects</a>
+            <a href="#blog">Blog</a>
+          </nav>
+        </div>
 
-        <nav class="site-nav" aria-label="Main">
-          <a href="#home">Home</a>
-          <a href="#projects">Projects</a>
-          <a href="#math">Math</a>
-        </nav>
+        <button
+          class="theme-toggle"
+          id="themeToggle"
+          aria-label="Toggle theme"
+          title="Toggle theme"
+        >
+          ☀️
+        </button>
       </div>
     </header>
 
-    <!-- 3. HERO / ABOUT ───────────────────── -->
-    <section id="home" class="hero">
-      <div class="container hero-stack">
-        <img src="assets/img/profile.jpg" alt="Portrait of Nurtilek Duishobaev" class="avatar">
+    <main>
+      <!-- HOME -->
+      <section id="home" class="hero">
+        <div class="container hero-stack">
+          <img
+            src="assets/img/profile.jpg"
+            alt="Portrait of Nurtilek Duishobaev"
+            class="avatar"
+          />
 
-        <h2 class="name">Nurtilek Duishobaev</h2>
+          <h1 class="name">Nurtilek Duishobaev</h1>
 
-        <p class="subtitle nowrap">
-          Bachelors&nbsp;student&nbsp;in&nbsp;Computer&nbsp;Science&nbsp;and&nbsp;Mathematics
-        </p>
+          <p class="subtitle">
+            Bachelors&nbsp;student&nbsp;in&nbsp;Computer&nbsp;Science&nbsp;and&nbsp;Mathematics
+          </p>
 
-        <p class="affil">
-          Korea Advanced Institute of Science and Technology, 2023&nbsp;–&nbsp;Present
-        </p>
+          <p class="affil">
+            Korea Advanced Institute of Science and Technology, 2023&nbsp;–&nbsp;Present
+          </p>
 
-        <p class="quote">
-          “only finite amount of mistaekes away from infinite possibilities”
-        </p>
+          <p class="quote">
+            “only finite amount of mistaekes away from infinite possibilities”
+          </p>
 
-        <a href="files/CV.pdf" class="btn" target="_blank" rel="noopener">Download CV</a>
-      </div>
-    </section>
-
-    <!-- 4. PROJECTS ───────────────────────── -->
-    <section id="projects">
-      <div class="container">
-        <h3 class="section-title">Projects</h3>
-
-        <div class="grid">
-          <figure class="card">
-            <img src="assets/img/project1.png" alt="">
-            <figcaption>
-              <h4>Project One</h4>
-              <p>One-line description of what the project does.</p>
-              <a class="btn" href="https://github.com/username/project" target="_blank" rel="noopener">Code</a>
-            </figcaption>
-          </figure>
+          <a href="files/CV.pdf" class="btn" target="_blank" rel="noopener"
+            >Download CV</a
+          >
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- 5. MATH NOTES ─────────────────────── -->
-    <section id="math">
-      <div class="container">
-        <h3 class="section-title">Math Notes</h3>
-    
-        <div class="textbook-grid">
-          <!-- --- Textbook 1 --- -->
-          <div class="textbook">
-            <h4>Linear Algebra by Hoffman and Kunze</h4>
-            <ul class="note-list">
-              <li><a href="files/LA_Ch1.pdf">Ch. 2 Vector Spaces</a></li>
-              <!-- add more chapters as you make them -->
-            </ul>
-          </div>
-    
-          <!-- --- Textbook 2 --- -->
-          <div class="textbook">
-            <h4>Book 2</h4>
-            <ul class="note-list">
-              <!-- add more chapters as you make them -->
-            </ul>
-          </div>
-    
-          <!-- --- Textbook 3 --- -->
-          <div class="textbook">
-            <h4>Book 3</h4>
-            <ul class="note-list">
-              <!-- add more chapters as you make them -->
-            </ul>
+      <!-- PROJECTS -->
+      <section id="projects">
+        <div class="container">
+          <h2 class="section-title">Projects</h2>
+
+          <div class="grid">
+            <figure class="card">
+              <img src="assets/img/project1.png" alt="Project One preview" />
+              <figcaption>
+                <h4>Project One</h4>
+                <p>One-line description of what the project does.</p>
+                <a
+                  class="btn"
+                  href="https://github.com/username/project"
+                  target="_blank"
+                  rel="noopener"
+                  >Code</a
+                >
+              </figcaption>
+            </figure>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- 6. FOOTER ─────────────────────────── -->
-    <footer class="site-footer">
-      <div class="container">
-        <p>&copy; 2025 Nurtilek Duishobaev.</p>
-        <p class="credit">
-          Built with plain HTML/CSS, inspired by
-          <a href="https://tomoki-okuno.com/" target="_blank" rel="noopener">Tomoki Okuno’s site</a>.
-        </p>
-      </div>
-    </footer>
+      <!-- BLOG (was Math) -->
+      <section id="blog">
+        <div class="container">
+          <h2 class="section-title">Blog</h2>
 
-  </div><!-- /.page -->
+          <div class="textbook-grid">
+            <div class="textbook">
+              <h4>Linear Algebra by Hoffman and Kunze</h4>
+              <ul class="note-list">
+                <li><a href="files/LA_Ch1.pdf">Ch. 2 Vector Spaces</a></li>
+              </ul>
+            </div>
 
-  <!-- 7. SCRIPTS ────────────────────────── -->
-  <script src="https://kit.fontawesome.com/YOUR_KIT_ID.js" crossorigin="anonymous"></script>
-</body>
+            <div class="textbook">
+              <h4>Book 2</h4>
+              <ul class="note-list"></ul>
+            </div>
+
+            <div class="textbook">
+              <h4>Book 3</h4>
+              <ul class="note-list"></ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <footer class="site-footer">
+        <div class="container">
+          <p>&copy; 2025 Nurtilek Duishobaev.</p>
+          <p class="credit">
+            Built with plain HTML/CSS, inspired by
+            <a
+              href="https://tomoki-okuno.com/"
+              target="_blank"
+              rel="noopener"
+              >Tomoki Okuno’s site</a
+            >.
+          </p>
+        </div>
+      </footer>
+    </main>
+
+    <script src="assets/js/theme.js"></script>
+  </body>
 </html>
