@@ -219,17 +219,40 @@ section {
   border: 1px solid transparent;
 }
 
-.contact-row .icon {
-  width: 18px;
-  height: 18px;
-  flex: 0 0 18px;
-  object-fit: contain;
-  opacity: 0.9;
-  filter: grayscale(1) brightness(2);
+:root {
+  --icon-ink: rgba(255, 255, 255, 0.92);
 }
 
-body.light .contact-row .icon {
-  filter: grayscale(1) brightness(0);
+body.light {
+  --icon-ink: rgba(0, 0, 0, 0.85);
+}
+
+.contact-row .icon {
+  width: var(--icon-size, 18px);
+  height: var(--icon-size, 18px);
+  flex: 0 0 var(--icon-size, 18px);
+
+  background: var(--icon-ink);
+
+  -webkit-mask: var(--icon-src) no-repeat center / contain;
+  mask: var(--icon-src) no-repeat center / contain;
+
+  opacity: 0.95;
+}
+
+.contact-row .icon1 {
+  --icon-src: url("../img/icon1.png");
+  --icon-size: 22px;
+}
+
+.contact-row .icon2 {
+  --icon-src: url("../img/icon2.png");
+  --icon-size: 26px;
+}
+
+.contact-row .icon3 {
+  --icon-src: url("../img/icon3.png");
+  --icon-size: 24px;
 }
 
 .contact-row .value {
