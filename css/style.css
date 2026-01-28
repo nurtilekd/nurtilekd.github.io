@@ -105,10 +105,10 @@ section {
 }
 
 .brand-name {
-  font-weight: 800;
-  font-size: 1.25rem;
+  font-weight: 600;
   letter-spacing: 0.2px;
   white-space: nowrap;
+  font-size: 1.05rem;
 }
 
 .site-nav {
