@@ -249,6 +249,8 @@ section {
 
 .icon-btn:hover {
   background: var(--btn-bg-hover);
+  border-color: var(--text);
+  transform: translateY(-2px);
   opacity: 1;
 }
 
