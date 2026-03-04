@@ -4,76 +4,30 @@
   "use strict";
 
   /* ════════════════════════════════════════════════════════════════════════
-     POST DATA
+     POST MANIFEST
      ──────────────────────────────────────────────────────────────────────
-     Each post has: id, title, date, description, and body (HTML string).
-     Add new posts here — everything else updates automatically.
+     Metadata only — actual content lives in  blogs/<file>.md
+     To add a post: create the .md file, then add a line here.
      ════════════════════════════════════════════════════════════════════ */
 
   var posts = [
     {
-      id: "hello-world",
+      file: "hello-world.md",
       title: "Hello, World!",
       date: "2026-03-04",
-      description: "First post on this blog — a short intro on what to expect.",
-      body: "\
-<h2>Why a blog?</h2>\
-<p>I have always wanted a place to collect ideas that don't fit neatly into a\
- homework submission or a lab report. This is that place.</p>\
-<h3>What I'll write about</h3>\
-<p>Expect a mix of CS deep dives, math puzzles, and reflections on studying\
- abroad. Some posts will be polished, some will be rough sketches of an idea.\
- That's fine.</p>\
-<h2>Tools I used</h2>\
-<p>This whole site is plain HTML, CSS, and vanilla JS — no frameworks,\
- no build step. I like keeping things simple.</p>\
-<h3>Hosting</h3>\
-<p>GitHub Pages. Free, fast, and close to the code.</p>\
-<h2>What's next</h2>\
-<p>A post about my first semester experience with machine-learning coursework\
- at KAIST. Stay tuned.</p>"
+      description: "First post on this blog — a short intro on what to expect."
     },
     {
-      id: "ml-semester",
+      file: "ml-semester.md",
       title: "Surviving an ML Course",
       date: "2026-03-04",
-      description: "Notes from my first few weeks in a machine learning class.",
-      body: "\
-<h2>First impressions</h2>\
-<p>The syllabus looked intimidating: entropy, KL divergence, variational\
- inference — all in the first month. I wasn't sure I was ready.</p>\
-<h3>Lecture style</h3>\
-<p>The professor derives everything on the board, no slides. It forces you to\
- keep up, but it also means you really understand each step.</p>\
-<h2>Study strategy</h2>\
-<p>I started re-deriving every formula from scratch after lecture. Slow at\
- first, but it builds real intuition over time.</p>\
-<h3>PyTorch homework</h3>\
-<p>The assignments are all in PyTorch. Writing the training loop by hand\
- (instead of using a high-level wrapper) was the biggest learning moment.</p>\
-<h2>Takeaways so far</h2>\
-<p>Understanding beats memorisation. If you can derive it, you own it.</p>"
+      description: "Notes from my first few weeks in a machine learning class."
     },
     {
-      id: "setup-old-pc",
+      file: "setup-old-pc.md",
       title: "Reviving a 10-Year-Old PC",
       date: "2026-03-04",
-      description: "Helping a family member get online with decade-old hardware.",
-      body: "\
-<h2>The situation</h2>\
-<p>My relative had an old desktop collecting dust — still running Windows 10,\
- no WiFi card, and a VGA monitor that refused to show a picture.</p>\
-<h3>Display fix</h3>\
-<p>Turned out the VGA cable was loose. A firm push and the monitor lit up.\
- Sometimes the simplest fix is the right one.</p>\
-<h2>Getting online</h2>\
-<p>No Ethernet near the desk. A USB WiFi adapter solved it for about $10.</p>\
-<h3>Driver headaches</h3>\
-<p>Windows 10 picked up the adapter automatically — no driver hunting needed.\
- A pleasant surprise for old hardware.</p>\
-<h2>Final setup</h2>\
-<p>Installed a browser, set up an email account, and walked through the\
- basics. The machine is slow, but perfectly fine for web browsing and email.</p>"
+      description: "Helping a family member get online with decade-old hardware."
     }
   ];
 
@@ -81,20 +35,21 @@
      DOM REFERENCES
      ════════════════════════════════════════════════════════════════════ */
 
-  var grid         = document.getElementById("postGrid");
-  var overlay      = document.getElementById("readerOverlay");
-  var contentEl    = document.getElementById("readerContent");
-  var listEl       = document.getElementById("readerList");
-  var tocListEl    = document.getElementById("readerTocList");
-  var closeBtn     = document.getElementById("readerClose");
-  var menuBtn      = document.getElementById("readerMenuBtn");
-  var prevBtn      = document.getElementById("prevPost");
-  var nextBtn      = document.getElementById("nextPost");
-  var prevLabel    = document.getElementById("prevLabel");
-  var nextLabel    = document.getElementById("nextLabel");
+  var grid      = document.getElementById("postGrid");
+  var overlay   = document.getElementById("readerOverlay");
+  var contentEl = document.getElementById("readerContent");
+  var listEl    = document.getElementById("readerList");
+  var tocListEl = document.getElementById("readerTocList");
+  var menuBtn   = document.getElementById("readerMenuBtn");
+  var prevBtn   = document.getElementById("prevPost");
+  var nextBtn   = document.getElementById("nextPost");
+  var prevLabel = document.getElementById("prevLabel");
+  var nextLabel = document.getElementById("nextLabel");
 
-  var currentIndex = 0;
-  var backdrop     = null;  // created lazily
+  var currentIndex = -1;
+  var backdrop     = null;
+  var cache        = {};           // file → parsed HTML
+  var tocObserver  = null;         // reused IntersectionObserver
 
   /* ════════════════════════════════════════════════════════════════════════
      RENDER POST CARDS
@@ -110,7 +65,7 @@
       return (
         '<div class="post-card" data-index="' + i + '">' +
           '<div class="post-card-title">' + esc(p.title) + '</div>' +
-          '<div class="post-card-date">' + formatDate(p.date) + '</div>' +
+          '<div class="post-card-date">' + niceDate(p.date) + '</div>' +
           '<div class="post-card-desc">' + esc(p.description) + '</div>' +
         '</div>'
       );
@@ -118,30 +73,117 @@
 
     grid.querySelectorAll(".post-card").forEach(function (card) {
       card.addEventListener("click", function () {
-        openReader(parseInt(this.dataset.index, 10));
+        openPost(parseInt(this.dataset.index, 10));
       });
     });
+  }
+
+  /* ════════════════════════════════════════════════════════════════════════
+     FETCH + PARSE MARKDOWN
+     ════════════════════════════════════════════════════════════════════ */
+
+  function loadPost(index, cb) {
+    var file = posts[index].file;
+
+    if (cache[file]) {
+      cb(cache[file]);
+      return;
+    }
+
+    fetch("blogs/" + file)
+      .then(function (r) {
+        if (!r.ok) throw new Error(r.status);
+        return r.text();
+      })
+      .then(function (md) {
+        var html = marked.parse(md);
+        cache[file] = html;
+        cb(html);
+      })
+      .catch(function () {
+        cb('<p style="opacity:.5">Could not load post.</p>');
+      });
   }
 
   /* ════════════════════════════════════════════════════════════════════════
      OPEN / CLOSE READER
      ════════════════════════════════════════════════════════════════════ */
 
-  function openReader(index) {
+  function openPost(index, skipPush) {
     currentIndex = index;
-    renderReader();
+
+    /* show loading state immediately */
     overlay.classList.add("open");
     document.body.classList.add("reader-open");
+    contentEl.innerHTML = '<p class="reader-loading">Loading…</p>';
+
+    renderSidebar();
+    updateNav();
+
+    /* push browser history so back button works */
+    if (!skipPush) {
+      history.pushState({ post: index }, "", "#post/" + posts[index].file.replace(".md", ""));
+    }
+
+    /* fetch and render */
+    loadPost(index, function (html) {
+      contentEl.innerHTML =
+        '<h1>' + esc(posts[index].title) + '</h1>' +
+        '<div class="reader-date">' + niceDate(posts[index].date) + '</div>' +
+        html;
+      contentEl.scrollTop = 0;
+      buildToc();
+    });
   }
 
-  function closeReader() {
+  function closeReader(skipPush) {
+    if (!overlay.classList.contains("open")) return;
     overlay.classList.remove("open");
     document.body.classList.remove("reader-open");
     closeDrawer();
+    currentIndex = -1;
+
+    if (!skipPush) {
+      history.pushState(null, "", window.location.pathname); // back to clean URL
+    }
   }
 
-  closeBtn.addEventListener("click", closeReader);
+  /* ════════════════════════════════════════════════════════════════════════
+     HISTORY (back / forward button)
+     ════════════════════════════════════════════════════════════════════ */
 
+  window.addEventListener("popstate", function (e) {
+    if (e.state && typeof e.state.post === "number") {
+      openPost(e.state.post, true);
+    } else {
+      closeReader(true);
+    }
+  });
+
+  /* If page loads with a #post/... hash, open that post */
+  function checkHash() {
+    var m = location.hash.match(/^#post\/(.+)$/);
+    if (!m) return;
+    var slug = m[1];
+    for (var i = 0; i < posts.length; i++) {
+      if (posts[i].file.replace(".md", "") === slug) {
+        openPost(i, true);
+        return;
+      }
+    }
+  }
+
+  /* ════════════════════════════════════════════════════════════════════════
+     TOPBAR NAV → closes reader
+     ════════════════════════════════════════════════════════════════════ */
+
+  document.querySelectorAll(".site-nav a").forEach(function (link) {
+    link.addEventListener("click", function () {
+      closeReader();
+    });
+  });
+
+  /* Escape key also closes */
   document.addEventListener("keydown", function (e) {
     if (e.key === "Escape" && overlay.classList.contains("open")) {
       closeReader();
@@ -149,63 +191,43 @@
   });
 
   /* ════════════════════════════════════════════════════════════════════════
-     RENDER READER CONTENTS
+     LEFT SIDEBAR (post list)
      ════════════════════════════════════════════════════════════════════ */
 
-  function renderReader() {
-    var post = posts[currentIndex];
-
-    /* ── centre: article ── */
-    contentEl.innerHTML =
-      '<h1>' + esc(post.title) + '</h1>' +
-      '<div class="reader-date">' + formatDate(post.date) + '</div>' +
-      post.body;
-
-    contentEl.scrollTop = 0;
-
-    /* ── left sidebar: post list ── */
+  function renderSidebar() {
     var heading = listEl.querySelector(".reader-list-heading");
-    // remove old links
-    Array.from(listEl.children).forEach(function (child) {
-      if (child !== heading) listEl.removeChild(child);
-    });
+
+    /* remove old links */
+    while (listEl.lastChild !== heading) {
+      listEl.removeChild(listEl.lastChild);
+    }
 
     posts.forEach(function (p, i) {
       var a = document.createElement("a");
       a.className = "reader-list-link" + (i === currentIndex ? " active" : "");
       a.textContent = p.title;
-      a.href = "#";
+      a.href = "#post/" + p.file.replace(".md", "");
       a.addEventListener("click", function (e) {
         e.preventDefault();
-        openReader(i);
+        openPost(i);
         closeDrawer();
       });
       listEl.appendChild(a);
     });
-
-    /* ── right sidebar: TOC ── */
-    buildToc();
-
-    /* ── prev / next ── */
-    var hasPrev = currentIndex > 0;
-    var hasNext = currentIndex < posts.length - 1;
-
-    prevBtn.disabled = !hasPrev;
-    nextBtn.disabled = !hasNext;
-    prevLabel.textContent = hasPrev ? posts[currentIndex - 1].title : "";
-    nextLabel.textContent = hasNext ? posts[currentIndex + 1].title : "";
   }
 
   /* ════════════════════════════════════════════════════════════════════════
-     TABLE OF CONTENTS (auto-generated from h2 / h3)
+     RIGHT SIDEBAR (table of contents)
      ════════════════════════════════════════════════════════════════════ */
 
   function buildToc() {
     tocListEl.innerHTML = "";
+    if (tocObserver) tocObserver.disconnect();
+
     var headings = contentEl.querySelectorAll("h2, h3");
 
     headings.forEach(function (h, i) {
-      var id = "rd-" + i;
+      var id = "s-" + i;
       h.id = id;
 
       var li = document.createElement("li");
@@ -221,20 +243,20 @@
       tocListEl.appendChild(li);
     });
 
-    /* highlight on scroll */
-    if ("IntersectionObserver" in window) {
+    /* scroll-based highlight */
+    if ("IntersectionObserver" in window && headings.length) {
       var links = tocListEl.querySelectorAll(".reader-toc-link");
-      var observer = new IntersectionObserver(function (entries) {
+      tocObserver = new IntersectionObserver(function (entries) {
         entries.forEach(function (entry) {
           if (entry.isIntersecting) {
             links.forEach(function (l) { l.classList.remove("active"); });
-            var match = tocListEl.querySelector('a[href="#' + entry.target.id + '"]');
-            if (match) match.classList.add("active");
+            var hit = tocListEl.querySelector('a[href="#' + entry.target.id + '"]');
+            if (hit) hit.classList.add("active");
           }
         });
       }, { root: contentEl, rootMargin: "-10% 0px -80% 0px" });
 
-      headings.forEach(function (h) { observer.observe(h); });
+      headings.forEach(function (h) { tocObserver.observe(h); });
     }
   }
 
@@ -242,16 +264,26 @@
      PREV / NEXT
      ════════════════════════════════════════════════════════════════════ */
 
+  function updateNav() {
+    var hasPrev = currentIndex > 0;
+    var hasNext = currentIndex < posts.length - 1;
+
+    prevBtn.disabled = !hasPrev;
+    nextBtn.disabled = !hasNext;
+    prevLabel.textContent = hasPrev ? posts[currentIndex - 1].title : "";
+    nextLabel.textContent = hasNext ? posts[currentIndex + 1].title : "";
+  }
+
   prevBtn.addEventListener("click", function () {
-    if (currentIndex > 0) openReader(currentIndex - 1);
+    if (currentIndex > 0) openPost(currentIndex - 1);
   });
 
   nextBtn.addEventListener("click", function () {
-    if (currentIndex < posts.length - 1) openReader(currentIndex + 1);
+    if (currentIndex < posts.length - 1) openPost(currentIndex + 1);
   });
 
   /* ════════════════════════════════════════════════════════════════════════
-     MOBILE DRAWER (left sidebar)
+     MOBILE DRAWER
      ════════════════════════════════════════════════════════════════════ */
 
   function ensureBackdrop() {
@@ -280,19 +312,16 @@
      HELPERS
      ════════════════════════════════════════════════════════════════════ */
 
-  function esc(str) {
+  function esc(s) {
     var d = document.createElement("div");
-    d.textContent = str;
+    d.textContent = s;
     return d.innerHTML;
   }
 
-  function formatDate(iso) {
-    var parts = iso.split("-");
-    var months = [
-      "Jan","Feb","Mar","Apr","May","Jun",
-      "Jul","Aug","Sep","Oct","Nov","Dec"
-    ];
-    return months[parseInt(parts[1], 10) - 1] + " " + parseInt(parts[2], 10) + ", " + parts[0];
+  function niceDate(iso) {
+    var p = iso.split("-");
+    var m = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+    return m[parseInt(p[1], 10) - 1] + " " + parseInt(p[2], 10) + ", " + p[0];
   }
 
   /* ════════════════════════════════════════════════════════════════════════
@@ -300,4 +329,5 @@
      ════════════════════════════════════════════════════════════════════ */
 
   renderCards();
+  checkHash();
 })();
