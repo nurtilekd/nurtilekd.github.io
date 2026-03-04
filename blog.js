@@ -15,19 +15,7 @@
       file: "hello-world.md",
       title: "Hello, World!",
       date: "2026-03-04",
-      description: "First post on this blog — a short intro on what to expect."
-    },
-    {
-      file: "ml-semester.md",
-      title: "Surviving an ML Course",
-      date: "2026-03-04",
-      description: "Notes from my first few weeks in a machine learning class."
-    },
-    {
-      file: "setup-old-pc.md",
-      title: "Reviving a 10-Year-Old PC",
-      date: "2026-03-04",
-      description: "Helping a family member get online with decade-old hardware."
+      description: "Description"
     }
   ];
 
