@@ -200,7 +200,6 @@ section {
   line-height: 1.15;
 }
 
-/* Subtitle + institution — identical size, weight, opacity */
 .subtitle,
 .institution {
   font-size: 0.85rem;
@@ -223,8 +222,6 @@ section {
 }
 
 /* ─── Icon links ─────────────────────────────────────────────────────────── */
-/* Row of icon buttons below the bio.
-   SVGs use currentColor so they automatically follow light/dark text color. */
 .icon-links {
   display: flex;
   flex-direction: row;
@@ -259,7 +256,7 @@ section {
   transform: scale(0.94);
 }
 
-/* ─── Blog ───────────────────────────────────────────────────────────────── */
+/* ─── Blog section ───────────────────────────────────────────────────────── */
 .section-title {
   font-size: 1.35rem;
   font-weight: 800;
@@ -267,47 +264,54 @@ section {
   letter-spacing: 0.2px;
 }
 
-.textbook-grid {
+/* ─── Post grid (blog cards) ─────────────────────────────────────────────── */
+.post-grid {
   display: grid;
-  gap: 1.5rem;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
 }
 
-.textbook {
+.post-card {
   background: var(--card);
   border: 1px solid var(--card-border);
   border-radius: var(--radius);
-  padding: 1rem;
+  padding: 1.15rem 1.25rem;
+  cursor: pointer;
+  transition: background 180ms ease, transform 140ms ease, border-color 180ms ease;
 }
 
-.textbook h4 {
-  font-weight: 800;
+.post-card:hover {
+  background: var(--btn-bg-hover);
+  border-color: var(--text);
+  transform: translateY(-2px);
+}
+
+.post-card:active {
+  transform: translateY(0);
+}
+
+.post-card-title {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 0.3rem;
+}
+
+.post-card-date {
+  font-size: 0.78rem;
+  opacity: 0.5;
   margin-bottom: 0.5rem;
 }
 
-.note-list {
-  list-style: none;
-  padding-left: 0;
+.post-card-desc {
+  font-size: 0.88rem;
+  opacity: 0.7;
+  line-height: 1.5;
 }
 
-.note-list li + li {
-  margin-top: 0.5rem;
-}
-
-.note-list a {
-  display: inline-block;
-  padding: 0.25rem 0.4rem;
-  border-radius: 8px;
-}
-
-.note-list a:hover {
-  background: var(--btn-bg);
-}
-
-.muted {
-  margin-top: 0.75rem;
-  opacity: 0.75;
+.post-grid-empty {
+  opacity: 0.55;
   font-size: 0.95rem;
+  padding: 1rem 0;
 }
 
 /* ─── Footer ─────────────────────────────────────────────────────────────── */
@@ -342,4 +346,404 @@ section {
     width: 42px;
     height: 42px;
   }
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════════════ */
+/*  BLOG READER OVERLAY                                                      */
+/* ═══════════════════════════════════════════════════════════════════════════ */
+
+.reader-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: var(--bg);
+  color: var(--text);
+  display: none;              /* hidden by default */
+  flex-direction: column;
+  overflow: hidden;
+  transition: background 200ms ease, color 200ms ease;
+}
+
+.reader-overlay.open {
+  display: flex;
+}
+
+/* prevent body scroll when reader is open */
+body.reader-open {
+  overflow: hidden;
+}
+
+/* ─── Close button ───────────────────────────────────────────────────────── */
+.reader-close {
+  position: fixed;
+  top: 18px;
+  right: 20px;
+  z-index: 120;
+  appearance: none;
+  border: 1px solid var(--btn-border);
+  background: var(--btn-bg);
+  color: var(--text);
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  cursor: pointer;
+  font-size: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 180ms ease, transform 120ms ease;
+}
+
+.reader-close:hover {
+  background: var(--btn-bg-hover);
+}
+
+.reader-close:active {
+  transform: scale(0.94);
+}
+
+/* ─── Mobile sidebar toggle ──────────────────────────────────────────────── */
+.reader-menu-btn {
+  display: none;      /* shown only on mobile */
+  position: fixed;
+  top: 18px;
+  left: 20px;
+  z-index: 120;
+  appearance: none;
+  border: 1px solid var(--btn-border);
+  background: var(--btn-bg);
+  color: var(--text);
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  transition: background 180ms ease;
+}
+
+.reader-menu-btn svg {
+  width: 18px;
+  height: 18px;
+}
+
+.reader-menu-btn:hover {
+  background: var(--btn-bg-hover);
+}
+
+/* ─── Three-column shell ─────────────────────────────────────────────────── */
+.reader-shell {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 240px 1fr 210px;
+  gap: 0;
+  overflow: hidden;
+  min-height: 0;
+}
+
+/* ─── Left sidebar (all posts) ───────────────────────────────────────────── */
+.reader-list {
+  border-right: 1px solid var(--btn-border);
+  padding: 1.5rem 1rem;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.reader-list-heading {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  opacity: 0.45;
+  margin-bottom: 0.75rem;
+  padding: 0 0.5rem;
+}
+
+.reader-list-link {
+  display: block;
+  padding: 0.55rem 0.65rem;
+  border-radius: 8px;
+  font-size: 0.88rem;
+  font-weight: 500;
+  opacity: 0.75;
+  cursor: pointer;
+  transition: background 160ms ease, opacity 160ms ease;
+  margin-bottom: 2px;
+}
+
+.reader-list-link:hover {
+  background: var(--btn-bg);
+  opacity: 1;
+}
+
+.reader-list-link.active {
+  background: var(--btn-bg-hover);
+  opacity: 1;
+  font-weight: 700;
+}
+
+/* ─── Centre content ─────────────────────────────────────────────────────── */
+.reader-content {
+  padding: 3rem 2.5rem 4rem;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  max-width: 100%;
+}
+
+.reader-content h1 {
+  font-size: 1.7rem;
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 0.25rem;
+}
+
+.reader-content .reader-date {
+  font-size: 0.8rem;
+  opacity: 0.45;
+  margin-bottom: 2rem;
+}
+
+.reader-content h2 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-top: 2.2rem;
+  margin-bottom: 0.6rem;
+}
+
+.reader-content h3 {
+  font-size: 1.02rem;
+  font-weight: 600;
+  margin-top: 1.6rem;
+  margin-bottom: 0.4rem;
+}
+
+.reader-content p {
+  margin-bottom: 1rem;
+  line-height: 1.7;
+  font-size: 0.95rem;
+  opacity: 0.88;
+}
+
+.reader-content ul,
+.reader-content ol {
+  margin-bottom: 1rem;
+  padding-left: 1.4rem;
+}
+
+.reader-content li {
+  margin-bottom: 0.35rem;
+  line-height: 1.6;
+  font-size: 0.95rem;
+  opacity: 0.88;
+}
+
+.reader-content pre {
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: 8px;
+  padding: 1rem 1.15rem;
+  overflow-x: auto;
+  font-size: 0.85rem;
+  line-height: 1.55;
+  margin-bottom: 1rem;
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+}
+
+.reader-content code {
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+  font-size: 0.88em;
+  background: var(--card);
+  padding: 0.15em 0.4em;
+  border-radius: 4px;
+}
+
+.reader-content pre code {
+  background: none;
+  padding: 0;
+}
+
+.reader-content blockquote {
+  border-left: 3px solid var(--btn-border);
+  padding-left: 1rem;
+  margin: 1rem 0;
+  opacity: 0.75;
+  font-style: italic;
+}
+
+/* ─── Right sidebar (TOC) ────────────────────────────────────────────────── */
+.reader-toc {
+  border-left: 1px solid var(--btn-border);
+  padding: 1.5rem 1rem;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.reader-toc-heading {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  opacity: 0.45;
+  margin-bottom: 0.75rem;
+  padding: 0 0.4rem;
+}
+
+.reader-toc ul {
+  list-style: none;
+  padding: 0;
+}
+
+.reader-toc-link {
+  display: block;
+  padding: 0.35rem 0.5rem;
+  border-radius: 6px;
+  font-size: 0.82rem;
+  opacity: 0.6;
+  cursor: pointer;
+  transition: background 160ms ease, opacity 160ms ease;
+}
+
+.reader-toc-link:hover {
+  background: var(--btn-bg);
+  opacity: 1;
+}
+
+.reader-toc-link.active {
+  opacity: 1;
+  font-weight: 600;
+}
+
+.reader-toc-link.depth-3 {
+  padding-left: 1.2rem;
+  font-size: 0.78rem;
+}
+
+/* ─── Prev / Next bar ────────────────────────────────────────────────────── */
+.reader-nav {
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid var(--btn-border);
+  padding: 0;
+  flex-shrink: 0;
+}
+
+.reader-nav-btn {
+  appearance: none;
+  border: none;
+  background: transparent;
+  color: var(--text);
+  padding: 0.9rem 1.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: inherit;
+  font-size: 0.88rem;
+  font-weight: 500;
+  opacity: 0.7;
+  transition: opacity 160ms ease, background 160ms ease;
+  flex: 1;
+}
+
+.reader-nav-btn:first-child {
+  border-right: 1px solid var(--btn-border);
+}
+
+.reader-nav-btn:last-child {
+  justify-content: flex-end;
+}
+
+.reader-nav-btn:hover {
+  opacity: 1;
+  background: var(--btn-bg);
+}
+
+.reader-nav-btn:disabled {
+  opacity: 0.25;
+  cursor: default;
+}
+
+.reader-nav-btn:disabled:hover {
+  background: transparent;
+}
+
+.reader-nav-arrow {
+  font-size: 1.1rem;
+}
+
+.reader-nav-label {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 200px;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════════════ */
+/*  READER – RESPONSIVE                                                      */
+/* ═══════════════════════════════════════════════════════════════════════════ */
+
+/* hide right TOC below 1200px */
+@media (max-width: 1200px) {
+  .reader-shell {
+    grid-template-columns: 240px 1fr;
+  }
+  .reader-toc {
+    display: none;
+  }
+}
+
+/* collapse left sidebar into mobile drawer below 800px */
+@media (max-width: 800px) {
+  .reader-shell {
+    grid-template-columns: 1fr;
+  }
+
+  .reader-menu-btn {
+    display: inline-flex;
+  }
+
+  .reader-list {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: min(300px, 85vw);
+    background: var(--bg);
+    z-index: 130;
+    transform: translateX(-100%);
+    transition: transform 260ms cubic-bezier(0.4, 0, 0.2, 1), box-shadow 260ms ease;
+    border-right: 1px solid var(--btn-border);
+    padding-top: 4.5rem;
+  }
+
+  .reader-list.drawer-open {
+    transform: translateX(0);
+    box-shadow: 6px 0 24px rgba(0, 0, 0, 0.25);
+  }
+
+  .reader-content {
+    padding: 3rem 1.25rem 4rem;
+  }
+
+  .reader-nav-label {
+    max-width: 120px;
+  }
+}
+
+/* Drawer backdrop */
+.reader-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 125;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 260ms ease;
+}
+
+.reader-backdrop.visible {
+  opacity: 1;
+  pointer-events: auto;
 }
